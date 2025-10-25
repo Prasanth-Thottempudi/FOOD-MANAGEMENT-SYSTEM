@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.ErrorResponseException;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.food.dao.CartitemRepository;
 import com.food.dao.CategoryRepository;
 import com.food.dao.FoodItemRepository;
+import com.food.entity.CartItem;
 import com.food.entity.Category;
 import com.food.entity.FoodItem;
 import com.food.request.FoodItemRequest;
@@ -27,6 +29,7 @@ import com.food.service.MinioServices;
 import io.minio.errors.InsufficientDataException;
 import io.minio.errors.InvalidResponseException;
 import io.minio.errors.XmlParserException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class FoodItemServiceImpl implements FoodItemService {
@@ -36,6 +39,10 @@ public class FoodItemServiceImpl implements FoodItemService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+    
+    @Autowired
+    private  CartitemRepository cartItemRepository;
+
 
     @Autowired
     private MinioServices minioServices;
@@ -55,26 +62,41 @@ public class FoodItemServiceImpl implements FoodItemService {
     @Override
     public FoodItemResponse createFoodItem(MultipartFile file, FoodItemRequest request)
             throws InvalidKeyException, ServerException, InternalException, IOException,
-                   NoSuchAlgorithmException, InsufficientDataException, InvalidResponseException, XmlParserException, ErrorResponseException, IllegalArgumentException, io.minio.errors.ErrorResponseException, io.minio.errors.InternalException, io.minio.errors.ServerException {
+                   NoSuchAlgorithmException, InsufficientDataException, InvalidResponseException,
+                   XmlParserException, ErrorResponseException, IllegalArgumentException,
+                   io.minio.errors.ErrorResponseException, io.minio.errors.InternalException,
+                   io.minio.errors.ServerException {
 
-        Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + request.getCategoryId()));
+        // ✅ Convert categoryId from String to Long
+        Long categoryId;
+        try {
+            categoryId = Long.parseLong(request.getCategoryId());
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid category ID format: " + request.getCategoryId());
+        }
 
-        FoodItem foodItem = FoodItem.builder()
-                .name(request.getName())
-                .description(request.getDescription())
-                .price(request.getPrice())
-                .category(category)
-                .availableQuantity(request.getAvailableQuantity() != null ? request.getAvailableQuantity() : 0)
-                .build();
+        // ✅ Fetch category from DB
+        Category category = categoryRepository.findById(categoryId.toString())
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
 
-        // Upload image to MinIO if file is provided
+        // ✅ Build new FoodItem
+        FoodItem foodItem = new FoodItem();
+        foodItem.setName(request.getName());
+        foodItem.setDescription(request.getDescription());
+        foodItem.setPrice(request.getPrice());
+        foodItem.setCategory(category);
+        foodItem.setAvailableQuantity(
+                request.getAvailableQuantity() != null ? request.getAvailableQuantity() : 0);
+        foodItem.setAvailable(request.isAvailable()); // ✅ set availability
+
+        // ✅ Upload image to MinIO (if provided)
         if (file != null && !file.isEmpty()) {
             String fileName = file.getOriginalFilename();
             MinioServiceResponse uploadResponse = minioServices.saveImage(file, fileName);
             foodItem.setImageUrl(uploadResponse.getImageUrl());
         }
 
+        // ✅ Save and map to response
         FoodItem savedItem = foodItemRepository.save(foodItem);
         return mapToResponse(savedItem);
     }
@@ -129,4 +151,21 @@ public class FoodItemServiceImpl implements FoodItemService {
         foodItemRepository.delete(foodItem);
         return new Response("Food item deleted successfully", "200");
     }
+    
+    @Transactional
+    public void updateFoodAvailability(Long foodItemId, boolean available) {
+        FoodItem foodItem = foodItemRepository.findById(foodItemId)
+                .orElseThrow(() -> new RuntimeException("Food item not found"));
+
+        foodItem.setAvailable(available);
+        foodItemRepository.save(foodItem);
+
+        List<CartItem> cartItems = cartItemRepository.findByFoodItem(foodItem);
+        for (CartItem cartItem : cartItems) {
+            cartItem.setAvailable(available);
+        }
+        cartItemRepository.saveAll(cartItems);
+    }
+    
+    
 }

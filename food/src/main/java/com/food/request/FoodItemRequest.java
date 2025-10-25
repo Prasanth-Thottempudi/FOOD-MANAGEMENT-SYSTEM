@@ -10,4 +10,7 @@ public class FoodItemRequest {
     private BigDecimal price;        // Price
     private String categoryId;       // Associated category ID
     private Integer availableQuantity; // Quantity available
+    private boolean available ;
+
+    
 }

@@ -2,19 +2,17 @@ package com.food.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "food_items")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@ToString(exclude = "category") // prevent recursive toString()
 public class FoodItem {
 
     @Id
@@ -26,15 +24,13 @@ public class FoodItem {
 
     @Column(length = 1000)
     private String description;
-    
-    
-
 
     @Column(nullable = false)
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY) // Many food items belong to one category
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
+    @JsonBackReference // prevents circular JSON serialization
     private Category category;
 
     @Column(length = 1000)
@@ -42,6 +38,9 @@ public class FoodItem {
 
     @Column(nullable = false)
     private Integer availableQuantity;
+
+    @Column(nullable = false)
+    private boolean available ;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -51,6 +50,7 @@ public class FoodItem {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
