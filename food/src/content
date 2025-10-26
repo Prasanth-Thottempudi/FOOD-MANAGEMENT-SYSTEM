@@ -1,0 +1,5 @@
+-- steps to start docker
+cd "C:\Users\PRASANTH\Desktop\Food\food"
+
+docker-compose build
+docker-compose up
