@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"        # MinIO Console/API
+      - "9001:9001"        # MinIO Admin Console (optional)
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin1234
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    restart: always
+
+  app:
+    build: .
+    container_name: food-app
+    ports:
+      - "9092:9092"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://food-rds.cunmy820cn5a.us-east-1.rds.amazonaws.com:3306/food?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 8897823543
+      MINIO_URL: http://minio:9000
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: admin1234
+    depends_on:
+      - minio
+    restart: always
+
+volumes:
+  minio_data:

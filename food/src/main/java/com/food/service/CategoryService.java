@@ -21,11 +21,11 @@ import io.minio.errors.XmlParserException;
 public interface CategoryService {
     CategoryResponse createCategory(MultipartFile file,CategoryRequest request) throws InvalidKeyException, ErrorResponseException, ServerException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, XmlParserException, IllegalArgumentException, io.minio.errors.ErrorResponseException, io.minio.errors.InternalException, io.minio.errors.ServerException, IOException;
 
-    CategoryResponse updateCategory(String id, CategoryRequest request);
+    CategoryResponse updateCategory(Long id, CategoryRequest request);
 
-    CategoryResponse getCategoryById(String id);
+    CategoryResponse getCategoryById(Long id);
 
     List<CategoryResponse> getAllCategories();
 
-    Response deleteCategory(String id);
+    Response deleteCategory(Long id);
 }

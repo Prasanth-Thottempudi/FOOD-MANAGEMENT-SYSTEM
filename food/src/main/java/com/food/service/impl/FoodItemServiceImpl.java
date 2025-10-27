@@ -70,13 +70,13 @@ public class FoodItemServiceImpl implements FoodItemService {
         // ✅ Convert categoryId from String to Long
         Long categoryId;
         try {
-            categoryId = Long.parseLong(request.getCategoryId());
-        } catch (NumberFormatException e) {
+            categoryId = request.getCategoryId();
+            } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid category ID format: " + request.getCategoryId());
         }
 
         // ✅ Fetch category from DB
-        Category category = categoryRepository.findById(categoryId.toString())
+        Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new RuntimeException("Category not found with id: " + categoryId));
 
         // ✅ Build new FoodItem
