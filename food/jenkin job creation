@@ -1,0 +1,50 @@
+# ==============================
+# Jenkins Job Setup Steps
+# ==============================
+
+# 1. Installed Jenkins on local Windows machine
+#    - Accessed Jenkins via http://localhost:8080
+#    - Unlocked Jenkins using initial admin password
+#    - Installed suggested plugins
+#    - Created first admin user
+
+# 2. Verified Jenkins service
+#    - Command: net start Jenkins
+#    - Checked Jenkins UI working properly
+
+# 3. Created a new Jenkins Job
+#    - Job Type: Freestyle Project
+#    - Job Name: FOOD-ITEM-JOB
+
+# 4. Configured Source Code Management (SCM)
+#    - Selected Git
+#    - Repository URL: https://github.com/Prasanth-Thottempudi/FOOD-MANAGEMENT-SYSTEM.git
+#    - Branch: main
+#    - No credentials used for public repo
+
+# 5. Configured Build Steps
+#    - Step: Invoke top-level Maven targets
+#    - Goals: clean install
+#    - Ensured POM.xml is at project root (or provide -f path)
+
+# 6. Configured Post-build Actions (optional)
+#    - Could trigger notifications or downstream jobs
+#    - Not configured in initial setup
+
+# 7. Ran the Job
+#    - Observed console output
+#    - First error: Couldn't find POM.xml -> ensured correct path
+#    - Fixed branch mismatch (master vs main)
+#    - Rebuilt successfully after corrections
+
+# 8. Common Issues Encountered
+#    - ERROR: The goal you specified requires a project to execute but there is no POM in this directory
+#      -> Solution: Ensure correct POM location and branch
+#    - Git branch mismatch (job defaulted to master, repo uses main)
+#      -> Solution: Set branch in SCM to 'main'
+
+# 9. Summary of Job Execution Flow
+#    - Pull code from GitHub
+#    - Build Spring Boot project using Maven
+#    - Optional: Build Docker image and deploy (if added later)
+#    - Console shows success or failure messages
