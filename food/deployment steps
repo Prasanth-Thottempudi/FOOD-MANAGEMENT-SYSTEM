@@ -1,0 +1,10 @@
+java -version  # To verify
+sudo yum install java-17-amazon-corretto -y
+
+  // run this in the command prompt of the local laptop
+scp -i "C:\JenkinsKeys\food-sytem.pem" "C:\Users\PRASANTH\Desktop\Food\food\target\food-0.0.1-SNAPSHOT.jar" ec2-user@34.234.126.22:/home/ec2-user/
+
+cd /home/ec2-user/ // run this in the mobaxterm
+ls -l  // Verify the JAR exists
+
+java -jar food-0.0.1-SNAPSHOT.jar
