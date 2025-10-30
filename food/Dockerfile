@@ -1,18 +1,14 @@
-# Use a lightweight OpenJDK 17 base image
+# Use a lightweight OpenJDK 17 image
 FROM eclipse-temurin:17-jdk-alpine
 
-# Set environment variables
-ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
-    JAVA_OPTS=""
-
-# Set work directory inside container
+# Set work directory
 WORKDIR /app
 
-# Copy the Maven-built JAR into the container
+# Copy the JAR from the Maven target folder
 COPY target/food-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose Spring Boot port
 EXPOSE 9092
 
 # Run the JAR
-ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
