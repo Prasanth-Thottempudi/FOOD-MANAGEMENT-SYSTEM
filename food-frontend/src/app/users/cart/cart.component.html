@@ -1,0 +1,70 @@
+<div class="cart-wrapper">
+	<!-- Section 1: Cart Items -->
+	<section class="cart-section">
+		<h2>Your Cart</h2>
+
+		<div class="cart-items">
+			<div class="cart-item" *ngFor="let item of cartItems">
+				<img [src]="item.image" alt="food" />
+				<div class="item-info">
+					<h3>{{ item.name }}</h3>
+					<p>{{ item.description }}</p>
+					<span class="price">₹{{ item.price }}</span>
+				</div>
+				<div class="item-actions">
+					<button (click)="decreaseQuantity(item)">−</button>
+					<span>{{ item.quantity }}</span>
+					<button (click)="increaseQuantity(item)">+</button>
+					<button class="remove-btn" (click)="removeItem(item)">Remove</button>
+				</div>
+			</div>
+		</div>
+
+		<button class="add-more-btn" routerLink="/user-dashboard/food">
+			+ Add More Items
+		</button>
+	</section>
+
+	<!-- Section 2: Savings Corner -->
+	<section class="savings-section">
+		<h2>Savings Corner</h2>
+		<div class="coupon-box">
+			<input type="text" placeholder="Enter coupon code" [(ngModel)]="couponCode" />
+			<button (click)="applyCoupon()">Apply</button>
+		</div>
+	</section>
+
+	<!-- Section 3: Suggested Items -->
+	<section class="suggested-section">
+		<h2>Suggested Items</h2>
+		<div class="suggested-list">
+			<div class="suggested-card" *ngFor="let suggest of suggestedItems">
+				<img [src]="suggest.image" alt="suggested" />
+				<h4>{{ suggest.name }}</h4>
+				<p>₹{{ suggest.price }}</p>
+				<button class="remove-btn" (click)="addToCart(suggest)">Add</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section 4: Bill Details -->
+	<section class="bill-section">
+		<h2>Bill Details</h2>
+		<div class="bill-row"><span>Item Total</span><span>₹{{ bill.itemTotal }}</span></div>
+		<div class="bill-row"><span>Handling Fee</span><span>₹{{ bill.handlingFee }}</span></div>
+		<div class="bill-row"><span>Smart Cart Fee</span><span>₹{{ bill.smartCartFee }}</span></div>
+		<div class="bill-row"><span>Delivery Tip</span><span>₹{{ bill.deliveryTip }}</span></div>
+		<div class="bill-row"><span>Delivery Partner Fee</span><span>₹{{ bill.deliveryPartnerFee }}</span></div>
+		<div class="bill-row"><span>GST & Charges</span><span>₹{{ bill.gst }}</span></div>
+
+		<div class="bill-total">
+			<span>Total Payable</span>
+			<span>₹{{ bill.total }}</span>
+		</div>
+	</section>
+
+	<!-- Section 5: Payment Button -->
+	<section class="payment-section">
+		<button class="pay-btn" (click)="proceedToPayment()">Proceed to Pay</button>
+	</section>
+</div>

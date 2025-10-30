@@ -1,0 +1,105 @@
+<div class="payment-wrapper">
+	<div class="payment-card">
+		<h2>Choose Payment Method</h2>
+
+		<!-- Section 1: Pay via UPI -->
+		<section class="payment-section">
+			<h3>Pay via UPI</h3>
+			<div class="payment-options">
+				<label>
+					<input type="radio" name="upi" />
+					<span class="upi-logo">
+						<img src="../../../assets/phonepe.png" alt="PhonePe Icon" />
+						PhonePe
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="upi" />
+					<span class="upi-logo">
+						<img src="../../../assets/imobile.png" alt="iMobile Icon" />
+						iMobile UPI
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="upi" />
+					<span class="upi-logo">
+						<img src="../../../assets/airtel.png" alt="Airtel Icon" />
+						Airtel UPI
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="upi" />
+					<span class="upi-logo add-new">+ Add New UPI ID</span>
+				</label>
+			</div>
+		</section>
+
+		<!-- Section 2: Credit / Debit Cards -->
+		<section class="payment-section">
+			<h3>Credit / Debit Card</h3>
+			<div class="payment-options">
+				<label>
+					<input type="radio" name="card" />
+					<span class="card-box">
+						<img src="../../../assets/creditcard.png" alt="Visa Icon" />
+						<p>**** **** **** 1234</p>
+						<small>Valid Thru 12/26</small>
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="card" />
+					<span class="card-box add-new">+ Add New Card</span>
+				</label>
+			</div>
+		</section>
+
+		<!-- Section 3: Other Payment Methods -->
+		<section class="payment-section">
+			<h3>Other Payment Methods</h3>
+			<div class="payment-options">
+				<label>
+					<input type="radio" name="other" />
+					<span class="other-option">
+						<img src="../../../assets/wallets.png" alt="Wallet Icon" />
+						Wallets
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="other" />
+					<span class="other-option">
+						<img src="../../../assets/netbanking.png" alt="Netbanking Icon" />
+						Netbanking
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="other" />
+					<span class="other-option">
+						<img src="../../../assets/credpay.png" alt="Cred Icon" />
+						Cred Pay
+					</span>
+				</label>
+				<label>
+					<input type="radio" name="other" />
+					<span class="other-option">
+						<img src="../../../assets/cashondelivery.png" alt="COD Icon" />
+						Pay on Delivery
+					</span>
+				</label>
+			</div>
+		</section>
+
+		<!-- Section 4: Pay Button -->
+		<section class="payment-section payment-action">
+			<button class="pay-btn" (click)="openModal()">Make Payment</button>
+		</section>
+	</div>
+</div>
+
+<div class="modal" *ngIf="isModalOpen">
+	<div class="modal-content">
+		<div class="success-icon">✔</div>
+		<h2>Order Placed!</h2>
+		<p>Your payment was successful. Thank you for your order.</p>
+		<button class="close-btn" (click)="closeModal()">OK</button>
+	</div>
+</div>

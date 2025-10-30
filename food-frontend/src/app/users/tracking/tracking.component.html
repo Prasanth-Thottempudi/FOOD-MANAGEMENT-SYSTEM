@@ -1,0 +1,15 @@
+<!-- Map Container -->
+<div id="map" class="map"></div>
+
+<!-- Reached Popup -->
+<div *ngIf="reached" class="reached-popup">
+  <h3>Agent has reached your location!</h3>
+  <button (click)="callCustomer()">Call Customer</button>
+  <button (click)="messageCustomer()">Message Customer</button>
+</div>
+
+<!-- Loading / Waiting Popup -->
+<div *ngIf="loadingRoute" class="loading-popup">
+  <div class="spinner"></div>
+  <p>Waiting for location update...</p>
+</div>

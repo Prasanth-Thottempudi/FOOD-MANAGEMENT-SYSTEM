@@ -1,0 +1,80 @@
+<div class="layout-container">
+	<!-- Sidebar -->
+	<nav id="sidebar">
+		<ul class="list-unstyled components">
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/food" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-concierge-bell"></i> <span>Food</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/orders" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-receipt"></i> <span>Orders</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/tracking" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-map-marker-alt"></i> <span>Tracking</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/cart" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-shopping-cart"></i> <span>Cart</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/wallet" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-wallet"></i> <span>Wallet</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/smart-order-assistant" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-robot"></i> <span>Smart Assistant</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/profile" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-user-circle"></i> <span>Profile</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/settings" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-cog"></i> <span>Settings</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/customer-support" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-headset"></i> <span>Support</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/user-dashboard/live-chat" class="nav-link" routerLinkActive="active">
+					<i class="fas fa-comments"></i> <span>Live Chat</span>
+				</a>
+			</li>
+
+			<li class="nav-item">
+				<a routerLink="/logout" class="nav-link">
+					<i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<!-- Main Content -->
+	<div class="main-content">
+		<app-admin-header></app-admin-header>
+		<div class="content-body">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,363 @@
+/* Header Styling */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.header-container h1 {
+    font-size: 28px;
+    color: #333;
+    font-weight: 700;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+}
+
+/* Button Styling */
+.service-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.add-btn:hover {
+    background-color: #218838;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Services Container */
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.service-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 50px);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
+}
+
+.service-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.service-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.service-info h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.service-info p {
+    font-size: 16px;
+    color: #666;
+}
+
+.header-title{
+	color: orange;
+}
+
+/* Form Styling */
+.service-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.service-form .form-group {
+    margin-bottom: 15px;
+}
+
+.service-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.service-form .form-group input,
+.service-form .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.service-form .service-btn.submit-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.service-form .service-btn.submit-btn:hover {
+    background-color: #218838;
+}
+
+.registration-form-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.registration-card {
+	width: 400px;
+}
+
+.full-width {
+	width: 100%;
+  }
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+  }
+  
+
+  .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+  }
+
+  .modal-container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	width: 400px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+
+  .full-width {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10px;
+  }
+
+  .modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  }
+  
+  .modal-container {
+	background-color: #fff;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	width: 400px;
+	max-width: 90%;
+  }
+  
+  .modal-title {
+	margin-bottom: 20px;
+	font-size: 1.5em;
+	color: #333;
+	text-align: center;
+  }
+  
+  .full-width {
+	width: 100%;
+  }
+  
+  .form-actions {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+  }
+  
+  .upload-container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	align-items: center;
+	text-align: center;
+  }
+  
+  .upload-label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border: 2px dashed #3f51b5;
+	padding: 20px;
+	border-radius: 8px;
+	color: #3f51b5;
+  }
+  
+  .upload-icon {
+	font-size: 40px;
+	margin-right: 10px;
+  }
+  
+  .preview-image {
+	margin-top: 10px;
+	max-width: 100%;
+	max-height: 150px;
+	border-radius: 5px;
+	border: 2px solid #ddd;
+  }
+  
+  .colorful-icon {
+	color: #3f51b5; /* Use any color you like */
+	margin-right: 10px;
+	font-size: 1.5em;
+	vertical-align: middle;
+	transition: color 0.3s ease;
+  }
+  
+  .colorful-icon:hover {
+	color: #ff4081; /* Change color on hover */
+  }
+/* Button Group Styling */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300%;
+  height: 300%;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: all 0.5s ease;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+button:hover::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+button:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Add Button Styling */
+.add-btn {
+  background: linear-gradient(135deg, #00c853, #b2ff59);
+  color: white;
+  border: 2px solid #00c853;
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #b2ff59, #00c853);
+  color: #fff;
+}
+
+/* Edit Button Styling */
+.edit-btn {
+  background: linear-gradient(135deg, #ffeb3b, #ffc107);
+  color: white;
+  border: 2px solid #ffc107;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #ffc107, #ffeb3b);
+  color: #fff;
+}
+
+/* Delete Button Styling */
+.delete-btn {
+  background: linear-gradient(135deg, #d32f2f, #ff5252);
+  color: white;
+  border: 2px solid #d32f2f;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #ff5252, #d32f2f);
+  color: #fff;
+}

@@ -1,0 +1,306 @@
+.food-wrapper {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  background: linear-gradient(135deg, #1a1a2e, #162447);
+  min-height: 100vh;
+}
+
+/* Section 1: Search */
+.search-section {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.search-section input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+}
+
+.search-section .mic-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #00f0ff, #007bff);
+  cursor: pointer;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* Section 2: Offers */
+.offer-section {
+  margin-bottom: 2rem;
+}
+
+.offer-section h2 {
+  color: #00f0ff;
+  margin-bottom: 1rem;
+}
+
+.offer-list {
+  display: flex;
+  gap: 1rem;
+  overflow-x: hidden;
+}
+
+.offer-card {
+  min-width: 200px;
+  background: #1f1f3a;
+  border-radius: 12px;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,123,255,0.3);
+  transition: 0.3s all;
+  flex-shrink: 0;
+}
+
+.offer-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+}
+
+.offer-card p {
+  font-weight: 600;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #00f0ff, 0 0 30px #007bff;
+}
+
+/* Section 3: Food grid */
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.food-card {
+  background: #1f1f3a;
+  border-radius: 16px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,123,255,0.4);
+  transition: 0.3s all;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* ensures button stays bottom */
+  height: 100%;
+  cursor: pointer;
+}
+
+.food-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 40px 10px #ff6600; /* horizontal, vertical, blur, spread, color */
+  border: 2px solid #ff6600; /* optional border for hover */
+}
+
+.food-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+}
+
+.food-card h3 {
+  margin: 0.5rem 0;
+}
+
+.food-card p {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin-bottom: 1rem;
+  flex-grow: 1; /* balances card height */
+}
+
+.price-add {
+  display: flex;
+  justify-content: space-between; /* adds gap between price & button */
+  align-items: center;
+  margin-top: auto; /* keeps price/add button aligned */
+  gap: 10px; /* additional gap for clarity */
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #00f0ff;
+}
+
+/* Add Button (Aligned in One Line Across All Cards) */
+.add-btn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  margin-top: auto; /* pushes button to bottom */
+  flex-shrink: 0;
+}
+
+.add-btn:hover {
+  background-color: #e65c00;
+}
+
+.add-btn i {
+  font-size: 12px;
+}
+
+/* Section 4: Categories */
+.category-section h2 {
+  color: #00f0ff;
+  margin-bottom: 1rem;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.category-card {
+  flex: 1 0 16%; /* 6 categories in 2 lines */
+  min-width: 120px;
+  background: #1f1f3a;
+  border-radius: 12px;
+  text-align: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,123,255,0.3);
+  transition: 0.3s all;
+}
+
+.category-card img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.category-card p {
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px #00f0ff, 0 0 25px #007bff;
+}
+
+/* Section 5: Filter & Sort */
+.filter-sort-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.filter-sort-section label {
+  margin-right: 0.5rem;
+}
+
+.filter-sort-section select {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #1f1f3a;
+  color: #fff;
+}
+
+/* Section 6: Restaurants */
+.restaurant-section {
+  margin-top: 2rem;
+}
+
+.restaurant-section h2 {
+  color: #00f0ff;
+  margin-bottom: 1rem;
+}
+
+.restaurant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.restaurant-card {
+  background: #1f1f3a;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+  transition: 0.3s all ease-in-out;
+  cursor: pointer;
+}
+
+.restaurant-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.restaurant-info {
+  padding: 1rem;
+  text-align: left;
+}
+
+.restaurant-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+.restaurant-info .location {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0.3rem 0;
+}
+
+.restaurant-info .rating {
+  color: #00f0ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.restaurant-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px #00f0ff, 0 0 35px #007bff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .food-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .category-card {
+    flex: 1 0 45%;
+  }
+
+  .offer-list {
+    overflow-x: scroll;
+  }
+
+  .restaurant-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}

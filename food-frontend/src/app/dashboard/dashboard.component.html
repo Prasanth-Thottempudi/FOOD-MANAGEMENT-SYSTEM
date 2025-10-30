@@ -1,0 +1,92 @@
+<div class="dashboard-wrapper">
+	<!-- Section 1: Header -->
+	<header class="dashboard-header">
+		<h1>FoodExpress</h1>
+		<div class="profile-cart">
+			<div class="profile">Hi, User</div>
+
+			<div class="action-buttons">
+
+
+				<li class="action-btn">
+					<a routerLink="/business-partner-registration" class="nav-link" routerLinkActive="active">
+						<i class="fas fa-building"></i> Business Registration
+					</a>
+				</li>
+
+
+				<li class="action-btn">
+					<a routerLink="/registration" class="nav-link" routerLinkActive="active">
+						<i class="fas fa-user-plus"></i> Registration
+					</a>
+				</li>
+
+				<button class="action-btn" (click)="onLogin()">
+					<i class="fas fa-sign-in-alt"></i> Login
+				</button>
+			</div>
+
+		</div>
+	</header>
+
+	<!-- Section 2: Categories -->
+	<section class="featured">
+		<h2>Categories</h2>
+		<div class="food-grid">
+			<div class="food-card" *ngFor="let cat of categories">
+				<img [src]="cat.image" alt="{{cat.name}}">
+				<!-- <span>{{cat.name}}</span> -->
+			</div>
+		</div>
+	</section>
+
+	<!-- Section 3: Featured / Deals -->
+	<section class="featured">
+		<h2>Featured Deals</h2>
+		<div class="food-grid">
+			<div class="food-card" *ngFor="let item of featuredItems">
+				<img [src]="item.image" alt="{{item.name}}" />
+				<h3>{{item.name}}</h3>
+				<p>{{item.description}}</p>
+				<div class="price-add">
+					<span class="price">₹{{item.price}}</span>
+					<button class="add-btn">Add</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section 4: Recommended for You -->
+	<section class="recommended">
+		<h2>Recommended for You</h2>
+		<div class="food-grid">
+			<div class="food-card" *ngFor="let item of recommendedItems">
+				<img [src]="item.image" alt="{{item.name}}" />
+				<h3>{{item.name}}</h3>
+				<p>{{item.description}}</p>
+				<div class="price-add">
+					<span class="price">₹{{item.price}}</span>
+					<button class="add-btn">Add</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section 5: Popular Restaurants -->
+	<section class="restaurants">
+		<h2>Popular Restaurants</h2>
+		<div class="restaurant-list">
+			<div class="restaurant-card" *ngFor="let res of restaurants">
+				<img [src]="res.image" alt="{{res.name}}">
+				<h3>{{res.name}}</h3>
+				<p>{{res.cuisine}}</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- Section 6: Footer / Quick Links -->
+	<footer class="dashboard-footer">
+		<span>© 2025 FoodExpress</span>
+		<span>Support | Privacy | Terms</span>
+	</footer>
+</div>

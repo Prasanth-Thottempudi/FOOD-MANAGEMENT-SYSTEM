@@ -1,0 +1,41 @@
+<div class="registration-wrapper">
+	<div class="registration-card">
+
+		<!-- Left Side: Image / Branding -->
+		<div class="registration-image">
+			<img src="../../assets/registration/regone.png" alt="Registration Banner">
+		</div>
+
+		<!-- Right Side: Registration Form -->
+		<div class="registration-form">
+			<h2 style="color: white;">Create Account</h2>
+
+			<!-- Single Step: Personal Info -->
+			<div class="step-content active">
+				<input type="text" placeholder="Full Name" [(ngModel)]="fullName" required>
+				<input type="email" placeholder="Email" [(ngModel)]="email" required>
+				<input type="tel" placeholder="Phone Number" [(ngModel)]="phoneNumber" required>
+				<input type="date" placeholder="Date of Birth" [(ngModel)]="dob" required>
+				<select [(ngModel)]="gender" required>
+					<option value="">Select Gender</option>
+					<option>Male</option>
+					<option>Female</option>
+					<option>Other</option>
+				</select>
+				<select [(ngModel)]="nationality" required>
+					<option value="">Select Nationality</option>
+					<option>India</option>
+					<option>USA</option>
+					<option>Other</option>
+				</select>
+
+				<!-- Action Buttons -->
+				<div class="buttons">
+					<button class="submit-btn" (click)="onSubmit()">Register</button>
+					<button class="cancel-btn" (click)="cancel()">Cancel</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

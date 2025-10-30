@@ -1,0 +1,27 @@
+<div class="orders-wrapper">
+	<h2>Your Orders</h2>
+	<div class="orders-grid">
+		<div class="order-card" *ngFor="let order of orders">
+			<img [src]="order.productImage" alt="{{ order.productName }}" class="product-image" />
+			<h3>{{ order.productName }}</h3>
+			<p>Quantity: {{ order.quantity }}</p>
+
+			<div class="ratings">
+				<div class="rating">
+					<span>Delivery:</span>
+					<span class="stars">
+						<ng-container *ngFor="let star of getStars(order.deliveryRating)">★</ng-container>
+					</span>
+				</div>
+				<div class="rating">
+					<span>Food:</span>
+					<span class="stars">
+						<ng-container *ngFor="let star of getStars(order.foodRating)">★</ng-container>
+					</span>
+				</div>
+			</div>
+
+			<p class="ordered-date">Ordered On: {{ order.orderedDate }}</p>
+		</div>
+	</div>
+</div>

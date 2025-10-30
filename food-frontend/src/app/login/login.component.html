@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <!-- Left Side: Login Form -->
+    <div class="login-form">
+      <h2>Welcome Back 👋</h2>
+      <p>Login to continue your food journey</p>
+
+      <div class="input-group">
+        <input type="text" [(ngModel)]="username" name="username" required />
+        <label>Username</label>
+      </div>
+
+      <div class="input-group">
+        <input type="password" [(ngModel)]="password" name="password" required />
+        <label>Password</label>
+      </div>
+
+
+      <!-- Action Buttons Side by Side -->
+      <div class="login-actions">
+        <button class="login-btn" (click)="onLogin()">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        <button class="cancel-btn" (click)="onCancel()">
+          <i class="fas fa-times"></i> Cancel
+        </button>
+      </div>
+
+
+      <div class="login-footer">
+        <p class="forgot">Forgot Password?</p>
+        <p>Don't have an account? <span class="signup-link">Register</span></p>
+      </div>
+    </div>
+
+    <!-- Right Side: Image -->
+    <div class="login-image">
+      <img src="../../assets/login banner.png" alt="Food Delivery" />
+    </div>
+  </div>
+</div>

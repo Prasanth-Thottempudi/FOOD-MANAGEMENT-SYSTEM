@@ -1,0 +1,70 @@
+<div class="header-container">
+	<div>
+		<h1 style="color: orange;">{{ serviceHeader }}</h1>
+	</div>
+	<div class="button-container">
+		<button class="service-btn add-btn" (click)="toggleForm()">Add Service</button>
+		<button class="service-btn edit-btn">Edit Service</button>
+		<button class="service-btn delete-btn">Delete Service</button>
+	</div>
+</div>
+
+<!-- Modal Popup for Add Service Form -->
+<div *ngIf="isFormVisible" class="modal-overlay">
+	<div class="modal-container">
+
+		<h2 class="modal-title">
+			<i class="fas fa-clipboard-list colorful-icon"></i>
+			Add New Service
+		  </h2>
+		  
+		<form [formGroup]="newServiceForm" (ngSubmit)="onServiceSubmit()" class="service-form">
+
+			<mat-form-field class="full-width" appearance="outline">
+				<mat-label>Service Name</mat-label>
+				<input matInput formControlName="servicename" required>
+				<mat-error *ngIf="newServiceForm.controls['servicename'].invalid">
+					Service Name is required
+				</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class="full-width" appearance="outline">
+				<mat-label>Service Description</mat-label>
+				<textarea matInput formControlName="servicedescription" rows="4" required></textarea>
+				<mat-error *ngIf="newServiceForm.controls['servicedescription'].invalid">
+					Service Description is required
+				</mat-error>
+			</mat-form-field>
+
+			<div class="upload-container">
+				<label for="serviceImageUpload" class="upload-label">
+					<mat-icon class="upload-icon">cloud_upload</mat-icon>
+					<span>Upload Service Image</span>
+				</label>
+				<input id="serviceImageUpload" type="file" (change)="onFileSelected($event)" hidden>
+				<div *ngIf="selectedImage" class="selected-image">
+					<img [src]="selectedImage" alt="Selected Image" class="preview-image">
+				</div>
+			</div>
+
+			<div class="form-actions">
+				<button mat-button (click)="closeForm()">Cancel</button>
+				<button mat-raised-button color="primary" [disabled]="!newServiceForm.valid">Submit</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!-- Services List -->
+<div class="services-container">
+	<div class="service-card" *ngFor="let service of services">
+		<div class="service-image">
+			<img [src]="service.serviceImageUrl" [alt]="service.serviceImageName">
+		</div>
+		<div class="service-info">
+			<h3>{{ service.serviceName }}</h3>
+			<p>{{ service.serviceDescription }}</p>
+		</div>
+	</div>
+</div>

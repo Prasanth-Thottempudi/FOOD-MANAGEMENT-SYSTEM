@@ -1,0 +1,170 @@
+.profile-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a2e, #162447);
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+.profile-card {
+  background: #1f1f3a;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 0 25px rgba(0,123,255,0.3);
+  overflow: hidden;
+  transition: 0.3s all;
+}
+
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px #00f0ff, 0 0 45px #007bff;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #00f0ff;
+  object-fit: cover;
+  margin-right: 1.5rem;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff;
+}
+
+.profile-info .role {
+  color: #ccc;
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+.profile-body {
+  padding: 1.5rem 2rem;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.info-item h4 {
+  margin: 0 0 0.3rem 0;
+  color: #00f0ff;
+  font-weight: 600;
+}
+
+.info-item p {
+  margin: 0;
+  color: #ccc;
+}
+
+.stats-section {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.stat-card {
+  background: #162447;
+  flex: 1 1 45%;
+  text-align: center;
+  border-radius: 12px;
+  padding: 1rem 0;
+  box-shadow: 0 0 15px rgba(0,123,255,0.3);
+  transition: 0.3s all;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px #00f0ff, 0 0 35px #007bff;
+}
+
+.stat-card i {
+  font-size: 2rem;
+  color: #00f0ff;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.stat-card p {
+  margin: 0;
+  color: #ccc;
+}
+
+.profile-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5rem 2rem;
+  gap: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+
+.edit-btn, .logout-btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.3s all;
+}
+
+.edit-btn {
+  background: linear-gradient(135deg, #00f0ff, #007bff);
+}
+
+.edit-btn:hover {
+  box-shadow: 0 0 15px #00f0ff, 0 0 25px #007bff;
+  transform: translateY(-3px);
+}
+
+.logout-btn {
+  background: linear-gradient(135deg, #ff0033, #ff6600);
+}
+
+.logout-btn:hover {
+  box-shadow: 0 0 15px #ff0033, 0 0 25px #ff6600;
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-row {
+    flex-direction: column;
+  }
+  .stats-section {
+    flex-direction: column;
+  }
+  .stat-card {
+    flex: 1 1 100%;
+  }
+  .profile-footer {
+    justify-content: center;
+  }
+}

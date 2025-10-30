@@ -1,0 +1,64 @@
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        alt="Profile"
+        class="profile-img"
+      />
+      <div class="profile-info">
+        <h2>{{ profileData.fullName }}</h2>
+        <p class="role">{{ profileData.role }}</p>
+      </div>
+    </div>
+
+    <div class="profile-body">
+      <div class="info-row">
+        <div class="info-item">
+          <h4>Email</h4>
+          <p>{{ profileData.email }}</p>
+        </div>
+        <div class="info-item">
+          <h4>Phone</h4>
+          <p>{{ profileData.phone }}</p>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <h4>Date of Birth</h4>
+          <p>{{ profileData.dateOfBirth }}</p>
+        </div>
+        <div class="info-item">
+          <h4>Gender</h4>
+          <p>{{ profileData.gender }}</p>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-item">
+          <h4>Address</h4>
+          <p>{{ profileData.address }}</p>
+        </div>
+      </div>
+
+      <div class="stats-section">
+        <div class="stat-card">
+          <i class="fas fa-shopping-bag"></i>
+          <h3>{{ profileData.totalOrders }}</h3>
+          <p>Total Orders</p>
+        </div>
+        <div class="stat-card">
+          <i class="fas fa-star"></i>
+          <h3>{{ profileData.rating }}</h3>
+          <p>Overall Rating</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-footer">
+      <button class="edit-btn">Edit Profile</button>
+      <button class="logout-btn">Logout</button>
+    </div>
+  </div>
+</div>

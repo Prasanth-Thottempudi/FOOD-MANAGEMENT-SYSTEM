@@ -1,0 +1,177 @@
+.wallet-wrapper {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  font-family: "Segoe UI", sans-serif;
+  color: #333;
+}
+
+.wallet-wrapper h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ff6600;
+}
+
+/* ===== Balance Card ===== */
+.balance-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.balance-info p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.balance-info h1 {
+  margin: 0.3rem 0 0 0;
+  font-size: 2.2rem;
+}
+
+.add-money {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.add-money input {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  width: 120px;
+}
+
+.add-money button {
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  border: none;
+  background-color: #ff6600;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-money button:hover {
+  background-color: #ff8c42;
+}
+
+/* ===== Transactions Card ===== */
+.transactions-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow-x: auto;
+}
+
+.transactions-card h3 {
+  margin-bottom: 1rem;
+  color: #1e3c72;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px; /* ensures table can scroll on small screens */
+}
+
+table th,
+table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+table th {
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+.success {
+  color: green;
+  font-weight: 600;
+}
+
+.pending {
+  color: orange;
+  font-weight: 600;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 768px) {
+  .balance-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.2rem;
+  }
+
+  .balance-info h1 {
+    font-size: 1.8rem;
+  }
+
+  .add-money {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .add-money input {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  .add-money button {
+    width: 100%;
+    max-width: 150px;
+  }
+
+  .transactions-card {
+    padding: 1rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-wrapper {
+    padding: 0.5rem;
+    margin: 1rem auto;
+  }
+
+  .balance-info p {
+    font-size: 0.9rem;
+  }
+
+  .balance-info h1 {
+    font-size: 1.5rem;
+  }
+
+  .add-money {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-money input,
+  .add-money button {
+    width: 100%;
+  }
+
+  table th,
+  table td {
+    padding: 0.5rem 0.6rem;
+  }
+}

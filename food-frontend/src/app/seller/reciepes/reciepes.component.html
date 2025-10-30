@@ -1,0 +1,19 @@
+<h1 style="color: orange;font-weight: bold;">recipes</h1>
+
+<div class="services-container">
+	<div class="service-card" *ngFor="let recipe of recipes">
+		<div class="service-image">
+			<img [src]="recipe.recipeUrl" [alt]="recipe.serviceImageName">
+		</div>
+		<div class="service-info">
+			<h3>{{ recipe.recipeName }}</h3>
+			<p>{{ recipe.recipeDescription }}</p>
+			<p>{{recipe.recipePrice}}</p>
+		</div>
+		<div class="button-group">
+			<button class="add-btn" (click)="addRecipe()">Add</button>
+			<button class="edit-btn" (click)="editRecipe(recipe.recipeId)">Edit</button>
+			<button class="delete-btn" (click)="deleteRecipe(recipe.recipeId)">Delete</button>
+		</div>
+	</div>
+</div>

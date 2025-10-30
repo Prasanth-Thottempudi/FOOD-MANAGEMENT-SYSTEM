@@ -1,0 +1,42 @@
+<div class="wallet-wrapper">
+	<h2 style="color: white;">My Wallet</h2>
+
+	<!-- Balance Card -->
+	<div class="balance-card">
+		<div class="balance-info">
+			<p>Current Balance</p>
+			<h1>{{ currency }}{{ balance | number:'1.2-2' }}</h1>
+		</div>
+		<div class="add-money">
+			<input type="number" [(ngModel)]="addMoneyAmount" placeholder="Amount" />
+			<button (click)="addMoney()">Add Money</button>
+		</div>
+	</div>
+
+	<!-- Transactions -->
+	<div class="transactions-card">
+		<h3>Recent Transactions</h3>
+		<table>
+			<thead>
+				<tr>
+					<th>Date</th>
+					<th>Type</th>
+					<th>Amount</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let txn of transactions">
+					<td>{{ txn.date }}</td>
+					<td>{{ txn.type }}</td>
+					<td>{{ currency }}{{ txn.amount }}</td>
+					<td>
+						<span [class.success]="txn.status==='Success'" [class.pending]="txn.status==='Pending'">
+							{{ txn.status }}
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

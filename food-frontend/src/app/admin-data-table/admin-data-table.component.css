@@ -1,0 +1,157 @@
+.container {
+	font-family: 'Roboto', sans-serif;
+	color: #050000;
+	padding: 15px;
+}
+
+h3 {
+	font-size: 24px;
+	font-weight: bold;
+	color: #444;
+	margin-bottom: 20px;
+}
+
+.table {
+	width: 100%;
+	margin-bottom: 1rem;
+	background-color: transparent;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.table thead {
+	background: linear-gradient(90deg, #7b5de3, #22d3ee);
+	color: #fff;
+}
+
+.table th, .table td {
+	padding: 1rem;
+	text-align: left;
+	border-bottom: 1px solid #e0e0e0;
+	word-wrap: break-word; /* Ensures text wraps in smaller views */
+}
+
+.table tbody tr {
+	transition: background-color 0.3s ease;
+}
+
+.table tbody tr:hover {
+	background-color: rgba(34, 211, 238, 0.2);
+}
+
+.table tbody td img {
+	border-radius: 50%;
+	max-width: 100%; /* Ensures logo images resize properly */
+	height: auto;
+}
+
+.table a {
+	color: #007bff;
+	text-decoration: none;
+}
+
+.table a:hover {
+	text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.table th, .table td {
+		font-size: 14px;
+		padding: 0.75rem;
+	}
+
+	.table thead {
+		display: none; /* Hide table header for smaller screens */
+	}
+
+	.table, .table tbody, .table tr, .table td {
+		display: block;
+		width: 100%;
+	}
+
+	.table tr {
+		margin-bottom: 15px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	.table td {
+		text-align: right;
+		position: relative;
+		padding-left: 50%;
+	}
+
+	.table td::before {
+		content: attr(data-label); /* Use custom data-label for each cell */
+		position: absolute;
+		left: 0;
+		width: 50%;
+		padding-left: 15px;
+		font-weight: bold;
+		text-align: left;
+	}
+
+	.table tbody td img {
+		width: 40px;
+		height: 40px; /* Ensure smaller image size on mobile */
+	}
+}
+
+.button-container {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin: 20px 0;
+	flex-wrap: wrap;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+	background: linear-gradient(90deg, #7b5de3, #22d3ee);
+	border-radius: 25px;
+	border: none;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	width: 120px;
+}
+
+.button:active {
+	transform: translateY(2px);
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Media query to make buttons responsive */
+@media (max-width: 576px) {
+	.button {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+}
+
+
+/* styles.css */
+.toast-success {
+	background-color: #4caf50 !important;  /* Stylish green for success */
+	color: white !important;
+	font-family: 'Roboto', sans-serif;     /* Use a modern font */
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  .toast-error {
+	background-color: #f44336 !important;  /* Stylish red for error */
+	color: white !important;
+	font-family: 'Roboto', sans-serif;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toast {
+	border-radius: 8px !important;  /* Add rounded corners */
+	padding: 16px !important;       /* Add padding for spacing */
+  }
+  

@@ -1,0 +1,54 @@
+<div class="dashboard-wrapper">
+	<!-- Sidebar -->
+	<aside class="sidebar">
+		<div class="sidebar-header">
+			<h2>Agent Panel</h2>
+		</div>
+
+		<ul class="sidebar-menu">
+
+			<li>
+
+				<a routerLink="agent-dashboard/agent-home" class="nav-link" routerLinkActive="active"></a>
+				<i class="fas fa-home"></i><span>Dashboard</span>
+
+			</li>
+
+
+			<li>
+				<i class="fas fa-tasks"></i>
+				<span>My Tasks</span>
+			</li>
+			<li>
+				<i class="fas fa-box"></i>
+				<span>Orders</span>
+			</li>
+			<li>
+				<i class="fas fa-users"></i>
+				<span>Clients</span>
+			</li>
+			<li>
+				<i class="fas fa-chart-line"></i>
+				<span>Reports</span>
+			</li>
+			<li>
+				<i class="fas fa-bell"></i>
+				<span>Notifications</span>
+			</li>
+			<li>
+				<i class="fas fa-user-cog"></i>
+				<span>Profile</span>
+			</li>
+			<li>
+				<i class="fas fa-sign-out-alt"></i>
+				<span>Logout</span>
+			</li>
+		</ul>
+	</aside>
+
+	<!-- Main Content -->
+	<div class="dashboard-main">
+		<!-- Main dashboard content will go here -->
+		<router-outlet></router-outlet>
+	</div>
+</div>
