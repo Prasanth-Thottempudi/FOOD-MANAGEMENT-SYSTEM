@@ -14,7 +14,10 @@ services:
     restart: always
 
   app:
-    image: eclipse-temurin:17-jdk-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: food-app-backend:latest
     container_name: food-app
     ports:
       - "9092:9092"
@@ -25,9 +28,6 @@ services:
       MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: admin
       MINIO_SECRET_KEY: admin1234
-    volumes:
-      - ./target/food-0.0.1-SNAPSHOT.jar:/app/app.jar
-    command: sh -c "java -jar /app/app.jar"
     depends_on:
       - minio
     restart: always
