@@ -1,0 +1,7 @@
+cd /home/ec2-user/food-app/target/
+
+
+# to check all the running docker images 
+docker ps 
+# to stop all the running docker images
+docker stop $(docker ps -q) 

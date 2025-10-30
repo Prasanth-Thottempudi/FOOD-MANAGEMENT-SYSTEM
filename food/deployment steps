@@ -1,0 +1,32 @@
+java -version  # To verify
+sudo yum install java-17-amazon-corretto -y
+
+  // run this in the command prompt of the local laptop
+scp -i "C:\JenkinsKeys\food-sytem.pem" "C:\Users\PRASANTH\Desktop\Food\food\target\food-0.0.1-SNAPSHOT.jar" ec2-user@34.234.126.22:/home/ec2-user/
+
+cd /home/ec2-user/ // run this in the mobaxterm
+ls -l  // Verify the JAR exists
+
+java -jar food-0.0.1-SNAPSHOT.jar
+
+// kill existed jar in the ec2
+sudo lsof -i :9092
+
+// response will be like this
+COMMAND   PID     USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+java    27808 ec2-user   19u  IPv6  50459      0t0  TCP *:XmlIpcRegSvc (LISTEN)
+
+
+PICK THE PID AND run the below command
+sudo kill -9 27808 [PID]
+
+// then run the jar 
+java -jar food-0.0.1-SNAPSHOT.jar
+
+// helps these commands to run the ec2 service though if you closed the mobaxterm sessioin
+sudo yum install tmux -y
+tmux new -s myapp
+java -jar food-0.0.1-SNAPSHOT.jar
+Ctrl + B then D
+tmux attach -t myapp
+// upto here
