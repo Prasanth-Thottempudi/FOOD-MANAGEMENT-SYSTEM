@@ -1,24 +1,9 @@
-services:
-  minio:
-    image: minio/minio
-    container_name: minio
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    environment:
-      MINIO_ROOT_USER: admin
-      MINIO_ROOT_PASSWORD: admin1234
-    command: server /data --console-address ":9001"
-    volumes:
-      - minio_data:/data
-    restart: always
-
   app:
     build:
-      context: .
+      context: ./food
       dockerfile: Dockerfile
     image: food-app-backend:latest
-    container_name: food-app
+    container_name: mannahub-backend
     ports:
       - "9092:9092"
     environment:
@@ -31,6 +16,3 @@ services:
     depends_on:
       - minio
     restart: always
-
-volumes:
-  minio_data:
