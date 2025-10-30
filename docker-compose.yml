@@ -1,4 +1,5 @@
-# docker-compose.yml (placed in FOOD-MANAGEMENT-SYSTEM root)
+version: "3.8"
+
 services:
   minio:
     image: minio/minio
@@ -15,7 +16,10 @@ services:
     restart: always
 
   backend:
-    build: ./food
+    build:
+      context: ./food
+      dockerfile: Dockerfile
+    image: food-app-backend:latest
     container_name: mannahub-backend
     ports:
       - "9092:9092"
@@ -31,10 +35,13 @@ services:
     restart: always
 
   frontend:
-    build: ./food-frontend
+    build:
+      context: ./food-frontend
+      dockerfile: Dockerfile
+    image: food-app-frontend:latest
     container_name: mannahub-frontend
     ports:
-      - "80:80" # Serve on standard HTTP port
+      - "80:80"
     depends_on:
       - backend
     restart: always
