@@ -20,7 +20,6 @@
   box-shadow: 0 0 25px #00f0ff, 0 0 40px #007bff;
 }
 
-/* Left Side: Image */
 .registration-image {
   flex: 1;
   position: relative;
@@ -60,7 +59,6 @@
   font-size: 0.9rem;
 }
 
-/* Right Side: Form */
 .registration-form {
   flex: 1;
   padding: 2rem;
@@ -74,18 +72,36 @@
   margin-bottom: 1rem;
 }
 
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 10px;
+  background: #2a2a42;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tab-btn.active {
+  background: #ff6600;
+  color: #fff;
+}
+
 .step-content {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.step-content.active {
-  display: flex;
-}
-
-input,
-select {
+.step-content input,
+.step-content select {
   padding: 0.8rem 1rem;
   border-radius: 10px;
   border: none;
@@ -94,7 +110,7 @@ select {
   font-size: 1rem;
 }
 
-input::placeholder {
+.step-content input::placeholder {
   color: #aaa;
 }
 
@@ -132,6 +148,20 @@ button {
   justify-content: space-between;
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 0.5rem;
+}
+
+.address-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 768px) {
   .registration-card {
     flex-direction: column;
@@ -139,4 +169,133 @@ button {
   .registration-image {
     height: 200px;
   }
+}
+/* File Upload Wrapper */
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Hidden default file input */
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+/* Custom file upload button */
+.custom-file-upload {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  background-color: #ff6600;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.custom-file-upload:hover {
+  background-color: #e65c00;
+}
+
+/* File name text */
+.file-name {
+  font-size: 0.9rem;
+  color: #aaa;
+  font-style: italic;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Checkbox Container */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #fff;
+  position: relative;
+  user-select: none;
+}
+
+/* Hide default checkbox */
+.checkbox-container input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* Custom checkbox box */
+.checkbox-container .checkmark {
+  width: 20px;
+  height: 20px;
+  background-color: #2a2a42;
+  border: 2px solid #ff6600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tick mark */
+.checkbox-container .checkmark::after {
+  content: "";
+  width: 6px;
+  height: 12px;
+  border: solid #ff6600;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+/* Show tick when checked */
+.checkbox-container input[type="checkbox"]:checked + .checkmark::after {
+  opacity: 1;
+}
+
+/* Hover effect */
+.checkbox-container:hover .checkmark {
+  background-color: #3a3a5a;
+}
+
+/* Label text */
+.checkbox-container span {
+  color: #fff;
+  font-weight: 500;
+}
+
+.registration-form h2 {
+  color: #efeeed; /* Vibrant accent color */
+  font-size: 2rem; /* Larger, prominent size */
+  font-weight: 700; /* Bold */
+  margin-bottom: 1.5rem; /* Space below */
+  text-align: center; /* Centered in the form */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+  letter-spacing: 1px; /* Slight spacing between letters */
+}
+.error {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Smooth fade-in for error messages */
+.error.ng-animating {
+  opacity: 0;
 }

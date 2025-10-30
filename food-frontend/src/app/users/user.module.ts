@@ -9,21 +9,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GoogleMapsModule } from '@angular/google-maps';
 
-import { UserRoutingModule } from './user-routing.module';
-
-import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
-import { FoodComponent } from './food/food.component';
-import { WishlistComponent } from './wishlist/wishlist.component';
-import { CartComponent } from './cart/cart.component';
-import { OrdersComponent } from './orders/orders.component';
-import { ProfileComponent } from '../profile/profile.component';
-import { PaymentComponent } from './payment/payment.component';
-import { TrackingComponent } from './tracking/tracking.component';
 import { CustomersupportComponent } from '../customersupport/customersupport.component';
 import { LivechatComponent } from '../livechat/livechat.component';
 import { WalletComponent } from '../wallet/wallet.component';
 import { SmartOrderAssistantComponent } from '../smart-order-assistant/smart-order-assistant.component';
 import { SettingsComponent } from '../settings/settings.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { FoodComponent } from './food/food.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { CartComponent } from './cart/cart.component';
+import { OrdersComponent } from './orders/orders.component';
+import { PaymentComponent } from './payment/payment.component';
+import { TrackingComponent } from './tracking/tracking.component';
+import { UserRoutingModule } from './user-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +30,6 @@ import { SettingsComponent } from '../settings/settings.component';
     WishlistComponent,
     CartComponent,
     OrdersComponent,
-    ProfileComponent,
     PaymentComponent,
     TrackingComponent,
     CustomersupportComponent,

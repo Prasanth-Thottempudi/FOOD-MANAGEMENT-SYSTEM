@@ -8,31 +8,93 @@
 
 		<!-- Right Side: Registration Form -->
 		<div class="registration-form">
-			<h2 style="color: white;">Create Account</h2>
+			<h2>Create Account</h2>
 
-			<!-- Single Step: Personal Info -->
-			<div class="step-content active">
-				<input type="text" placeholder="Full Name" [(ngModel)]="fullName" required>
-				<input type="email" placeholder="Email" [(ngModel)]="email" required>
-				<input type="tel" placeholder="Phone Number" [(ngModel)]="phoneNumber" required>
-				<input type="date" placeholder="Date of Birth" [(ngModel)]="dob" required>
-				<select [(ngModel)]="gender" required>
-					<option value="">Select Gender</option>
-					<option>Male</option>
-					<option>Female</option>
-					<option>Other</option>
-				</select>
-				<select [(ngModel)]="nationality" required>
-					<option value="">Select Nationality</option>
-					<option>India</option>
-					<option>USA</option>
-					<option>Other</option>
-				</select>
+			<!-- Tab Buttons -->
+			<div class="tab-buttons">
+				<button class="tab-btn" [class.active]="activeTab === 0" (click)="activeTab = 0">Basic Info</button>
+				<button class="tab-btn" *ngIf="addAddress" [class.active]="activeTab === 1"
+					(click)="activeTab = 1">Address</button>
+			</div>
 
-				<!-- Action Buttons -->
+			<!-- Tab 1: Basic Info -->
+			<div class="step-content" *ngIf="activeTab === 0">
+
+				<!-- Full Name -->
+				<input type="text" placeholder="Full Name" [(ngModel)]="user.name" name="name" required
+					#nameRef="ngModel">
+				<div class="error" *ngIf="nameRef.invalid && nameRef.touched">Name is required.</div>
+
+				<!-- Email -->
+				<input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required
+					pattern="^[a-zA-Z0-9._%+-]+@gmail\.com$" #emailRef="ngModel"
+					(blur)="emailRef.control.markAsTouched()">
+				<div class="error" *ngIf="emailRef.touched && emailRef.invalid">
+					<span *ngIf="emailRef.errors?.['required']">Email is required.</span>
+					<span *ngIf="emailRef.errors?.['pattern']">Email must be a valid @gmail.com address.</span>
+				</div>
+
+				<!-- Password -->
+				<input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required
+					pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&])[A-Za-z\d@$!%*?#&]{8,}$"
+					#passwordRef="ngModel" (blur)="passwordRef.control.markAsTouched()">
+				<div class="error" *ngIf="passwordRef.touched && passwordRef.invalid">
+					<span *ngIf="passwordRef.errors?.['required']">Password is required.</span>
+					<span *ngIf="passwordRef.errors?.['pattern']">Password must be 8+ chars with uppercase, lowercase,
+						number & special char.</span>
+				</div>
+
+				<!-- Phone Number -->
+				<input type="tel" placeholder="Phone Number" [(ngModel)]="user.mobileNumber" name="mobileNumber"
+					required pattern="^[6-9]\d{9}$" #phoneRef="ngModel" (blur)="phoneRef.control.markAsTouched()">
+				<div class="error" *ngIf="phoneRef.touched && phoneRef.invalid">
+					<span *ngIf="phoneRef.errors?.['required']">Phone number is required.</span>
+					<span *ngIf="phoneRef.errors?.['pattern']">Phone number must be 10 digits starting with
+						6,7,8,9.</span>
+				</div>
+
+				<!-- File Upload -->
+				<div class="file-upload-wrapper">
+					<label class="custom-file-upload">
+						<input type="file" (change)="onFileChange($event)">
+						Choose Profile Image
+					</label>
+					<span class="file-name">{{ selectedFileName || 'No file chosen' }}</span>
+				</div>
+
+				<!-- Checkbox & Sign Up Button -->
+				<div class="file-and-checkbox">
+					<label class="checkbox-container" *ngIf="selectedFileName">
+						<input type="checkbox" [(ngModel)]="addAddress">
+						<span class="checkmark"></span>
+						<span>Add Address</span>
+					</label>
+					<button class="signup-btn" (click)="onSubmit()">Sign Up</button>
+					<button style="margin-left: 10px;" class="signup-btn" (click)="onCancel()">Cancel</button>
+
+				</div>
+
+				<!-- Next button for Address tab -->
+				<div class="buttons" *ngIf="addAddress">
+					<button class="next-btn" (click)="activeTab = 1">Next</button>
+				</div>
+
+			</div>
+
+			<!-- Tab 2: Address -->
+			<div class="step-content" *ngIf="activeTab === 1 && addAddress">
+				<div class="address-fields">
+					<input type="text" placeholder="Address Line 1" [(ngModel)]="user.addressLine1">
+					<input type="text" placeholder="Address Line 2" [(ngModel)]="user.addressLine2">
+					<input type="text" placeholder="City" [(ngModel)]="user.city">
+					<input type="text" placeholder="State" [(ngModel)]="user.state">
+					<input type="text" placeholder="Postal Code" [(ngModel)]="user.postalCode">
+					<input type="text" placeholder="Country" [(ngModel)]="user.country">
+				</div>
+
 				<div class="buttons">
+					<button class="prev-btn" (click)="activeTab = 0">Previous</button>
 					<button class="submit-btn" (click)="onSubmit()">Register</button>
-					<button class="cancel-btn" (click)="cancel()">Cancel</button>
 				</div>
 			</div>
 

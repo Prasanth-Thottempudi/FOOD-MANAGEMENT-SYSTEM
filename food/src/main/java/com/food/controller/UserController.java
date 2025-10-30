@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/users") 
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -36,6 +38,7 @@ public class UserController {
             @RequestPart("file") MultipartFile file,
             @RequestPart("user") String request) throws Exception {
 
+    	System.out.println("checking");
 	     ObjectMapper objectMapper = new ObjectMapper();
 	     UserRequest userRequest = objectMapper.readValue(request, UserRequest.class);
         UserResponse response = userService.saveUser(file, userRequest);

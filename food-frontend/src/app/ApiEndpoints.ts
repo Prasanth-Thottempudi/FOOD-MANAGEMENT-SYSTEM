@@ -12,6 +12,7 @@ export const ApiEndpoints = {
     GET_PROFILE: `${BASE_URL}/users/profile`,
     UPDATE_PROFILE: `${BASE_URL}/users/update`,
     ALL_USERS: `${BASE_URL}/users`,
+    USER_REGISTRATIOIN: `${BASE_URL}/users/register`,
   },
   FOOD: {
     ALL_ITEMS: `${BASE_URL}/food/items`,
