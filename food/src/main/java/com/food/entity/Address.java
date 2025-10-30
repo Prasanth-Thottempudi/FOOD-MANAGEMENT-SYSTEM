@@ -1,24 +1,25 @@
 package com.food.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "addresses")
 public class Address {
 
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String doorNumber;
-	private String villageName;
-	private String cityName;
-	private String districtName;
-	private String stateName;
-	private String pincode;
+    private Integer id;
+
+    private String addressLine1;
+    private String addressLine2;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
 }

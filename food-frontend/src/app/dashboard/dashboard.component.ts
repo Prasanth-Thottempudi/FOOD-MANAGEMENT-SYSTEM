@@ -73,6 +73,6 @@ export class DashboardComponent {
   ];
 
   onLogin(): void {
-    this.router.navigate(['/agent-dashboard']);
+    this.router.navigate(['/user-dashboard']);
   }
 }

@@ -1,22 +1,18 @@
 package com.food.service.impl;
 
-
 import java.io.IOException;
-import java.rmi.ServerException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.util.InternalException;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.ErrorResponseException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.food.dao.UserRepository;
+import com.food.entity.Address;
 import com.food.entity.User;
 import com.food.exception.AlreadyExistsException;
 import com.food.exception.InvalidCredentialsException;
@@ -32,18 +28,24 @@ import com.food.service.UserService;
 import io.minio.errors.InsufficientDataException;
 import io.minio.errors.InvalidResponseException;
 import io.minio.errors.XmlParserException;
+import org.springframework.web.ErrorResponseException;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-    private  UserRepository userRepository;
-	
-	@Autowired
-	private MinioServices minioServices;
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private MinioServices minioServices;
 
     @Override
-    public UserResponse saveUser(MultipartFile profileImage,UserRequest request) throws InvalidKeyException, ErrorResponseException, ServerException, InsufficientDataException, InternalException, InvalidResponseException, NoSuchAlgorithmException, XmlParserException, IllegalArgumentException, io.minio.errors.ErrorResponseException, io.minio.errors.InternalException, io.minio.errors.ServerException, IOException {
+    public UserResponse saveUser(MultipartFile profileImage, UserRequest request)
+            throws InvalidKeyException, ErrorResponseException, InsufficientDataException, 
+                   InvalidResponseException, NoSuchAlgorithmException, XmlParserException, 
+                   IOException, io.minio.errors.ErrorResponseException, 
+                   io.minio.errors.InternalException, io.minio.errors.ServerException {
+
         // Check for duplicate email
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new AlreadyExistsException("User with email " + request.getEmail() + " already exists!");
@@ -51,16 +53,35 @@ public class UserServiceImpl implements UserService {
 
         User user = new User();
         user.setPassword(request.getPassword());
-        String profileName = profileImage.getOriginalFilename();
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setMobileNumber(request.getMobileNumber());
+        user.setLatitude(request.getLatitude());
+        user.setLongitude(request.getLongitude());
 
-        MinioServiceResponse imageSaved = minioServices.saveImage(profileImage, profileName);
-        
-        BeanUtils.copyProperties(request, user);
+        // Map Address if provided
+        if (request.getAddressLine1() != null || request.getAddressLine2() != null) {
+            Address address = new Address();
+            address.setAddressLine1(request.getAddressLine1());
+            address.setAddressLine2(request.getAddressLine2());
+            address.setCity(request.getCity());
+            address.setState(request.getState());
+            address.setPostalCode(request.getPostalCode());
+            address.setCountry(request.getCountry());
 
-        String imageUrl = imageSaved.getImageUrl();
-        user.setProfileUrl(imageUrl);
+            // Cascade will save the address automatically
+            user.setAddress(address);
+        }
+
+        // Handle profile image
+        if (profileImage != null && !profileImage.isEmpty()) {
+            String profileName = profileImage.getOriginalFilename();
+            MinioServiceResponse imageSaved = minioServices.saveImage(profileImage, profileName);
+            user.setProfileUrl(imageSaved.getImageUrl());
+        }
+
+        // Save user (Address will be saved automatically due to CascadeType.ALL)
         User saved = userRepository.save(user);
-
         return mapToResponse(saved);
     }
 
@@ -69,12 +90,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(request.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + request.getUsername()));
 
-     if(!(request.getPassword().equalsIgnoreCase(user.getPassword()))){
-    	 throw new InvalidCredentialsException("invalid username and password");
-     }
+        if (!request.getPassword().equals(user.getPassword())) {
+            throw new InvalidCredentialsException("Invalid username or password");
+        }
 
-        Response response=new Response();
-        response.setSuccessMessage("user logged in successfully!");
+        Response response = new Response();
+        response.setSuccessMessage("User logged in successfully!");
         return response;
     }
 
@@ -90,10 +111,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserResponse> getAllUsers() {
-       List<User> users = userRepository.findAll()
-                .stream().collect(Collectors.toList());
-
-        return  mapToResponseList(users);
+        List<User> users = userRepository.findAll();
+        return mapToResponseList(users);
     }
 
     @Override
@@ -101,14 +120,27 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + request.getEmail()));
 
-        if (request.getName() != null)
-            user.setName(request.getName());
+        if (request.getName() != null) user.setName(request.getName());
+        if (request.getPassword() != null && !request.getPassword().isBlank()) user.setPassword(request.getPassword());
+        if (request.getMobileNumber() != null) user.setMobileNumber(request.getMobileNumber());
+        if (request.getLatitude() != null) user.setLatitude(request.getLatitude());
+        if (request.getLongitude() != null) user.setLongitude(request.getLongitude());
 
-        if (request.getPassword() != null && !request.getPassword().isBlank())
-            user.setPassword(request.getPassword());
+        // Update or create Address
+        if (request.getAddressLine1() != null || request.getAddressLine2() != null) {
+            Address address = user.getAddress() != null ? user.getAddress() : new Address();
+
+            if (request.getAddressLine1() != null) address.setAddressLine1(request.getAddressLine1());
+            if (request.getAddressLine2() != null) address.setAddressLine2(request.getAddressLine2());
+            if (request.getCity() != null) address.setCity(request.getCity());
+            if (request.getState() != null) address.setState(request.getState());
+            if (request.getPostalCode() != null) address.setPostalCode(request.getPostalCode());
+            if (request.getCountry() != null) address.setCountry(request.getCountry());
+
+            user.setAddress(address);
+        }
 
         User updated = userRepository.save(user);
-
         return mapToResponse(updated);
     }
 
@@ -120,9 +152,9 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
         userRepository.delete(user);
-
         return mapToResponse(user);
     }
+
     private UserResponse mapToResponse(User user) {
         UserResponse response = new UserResponse();
         response.setUserId(user.getId());
@@ -130,24 +162,26 @@ public class UserServiceImpl implements UserService {
         response.setEmail(user.getEmail());
         response.setMobileNumber(user.getMobileNumber());
         response.setProfileUrl(user.getProfileUrl());
+        response.setLatitude(user.getLatitude());
+        response.setLongitude(user.getLongitude());
+
+        if (user.getAddress() != null) {
+            response.setAddressLine1(user.getAddress().getAddressLine1());
+            response.setAddressLine2(user.getAddress().getAddressLine2());
+            response.setCity(user.getAddress().getCity());
+            response.setState(user.getAddress().getState());
+            response.setPostalCode(user.getAddress().getPostalCode());
+            response.setCountry(user.getAddress().getCountry());
+        }
+
         return response;
     }
-
 
     private List<UserResponse> mapToResponseList(List<User> users) {
         List<UserResponse> responses = new ArrayList<>();
         for (User user : users) {
-            UserResponse response = new UserResponse();
-            response.setUserId(user.getId());
-            response.setName(user.getName());
-            response.setEmail(user.getEmail());
-            response.setMobileNumber(user.getMobileNumber());
-            response.setProfileUrl(user.getProfileUrl());
-            responses.add(response);
+            responses.add(mapToResponse(user));
         }
         return responses;
     }
-
-  
-    
 }

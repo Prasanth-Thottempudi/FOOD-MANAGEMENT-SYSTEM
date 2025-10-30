@@ -26,6 +26,14 @@ public class User {
     @Column(name = "user_image", length = 10000)
     private String profileUrl;
 
+    private Double latitude;
+    private Double longitude;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonBackReference
     private List<Order> orders;
