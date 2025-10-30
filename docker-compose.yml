@@ -36,8 +36,8 @@ services:
 
   frontend:
     build:
-      context: ./food-frontend
-      dockerfile: Dockerfile
+      context: . # 👈 Changed from ./food-frontend
+      dockerfile: ./food-frontend/Dockerfile # 👈 Updated path
     image: food-app-frontend:latest
     container_name: mannahub-frontend
     ports:
