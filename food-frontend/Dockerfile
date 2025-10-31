@@ -6,33 +6,30 @@ FROM node:18 AS build
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy dependency files
 COPY ./food-frontend/package*.json ./
 RUN npm ci --legacy-peer-deps
 
 # Copy the rest of the Angular project
 COPY ./food-frontend .
 
-# Increase Node memory for large builds (recommended)
+# Allow Angular more memory (prevents OOM)
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-# Build the Angular app in production mode
-RUN npm run build -- --configuration production
+# ✅ Build Angular for production
+# Try new Angular build syntax; fallback to old one if project uses older CLI
+RUN npm run build -- --configuration production || npm run build --prod
 
 # -------------------------
 # Stage 2: Serve with Nginx
 # -------------------------
 FROM nginx:alpine
 
-# Copy Angular build output
-# 👇 Use the correct path from angular.json
+# ✅ Correct dist path from your angular.json ("dist/application")
 COPY --from=build /app/dist/application /usr/share/nginx/html
 
-# Copy custom Nginx config (optional)
+# Optional: custom Nginx config
 COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
