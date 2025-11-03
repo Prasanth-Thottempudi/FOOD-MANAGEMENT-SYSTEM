@@ -1,18 +1,117 @@
-  app:
+# ============================
+# Docker Compose for Food App
+# DEV uses local MySQL
+# PROD uses Docker MySQL
+# ============================
+
+services:
+
+  # ======================
+  # MySQL (PROD ONLY)
+  # ======================
+  mysql-prod:
+    image: mysql:8.0
+    container_name: mannahub-mysql-prod
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secureProdPass}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-food}
+      MYSQL_USER: ${MYSQL_USER:-admin}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secureProdPass}
+    volumes:
+      - mysql-data-prod:/var/lib/mysql
+    restart: always
+    networks:
+      - mannahub-network
+    profiles: ["prod"]
+
+  # ======================
+  # Redis (shared)
+  # ======================
+  redis:
+    image: redis:6-alpine
+    container_name: mannahub-redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - mannahub-network
+    profiles: ["dev", "prod"]
+
+  # ======================
+  # MinIO (DEV only)
+  # ======================
+  minio:
+    image: minio/minio
+    container_name: mannahub-minio
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin1234
+    command: server /data
+    ports:
+      - "9000:9000"
+    restart: always
+    networks:
+      - mannahub-network
+    profiles: ["dev"]
+
+  # ======================
+  # Backend App (DEV)
+  # ======================
+  app-dev:
     build:
-      context: ./food
+      context: .
       dockerfile: Dockerfile
-    image: food-app-backend:latest
-    container_name: mannahub-backend
+    image: food-app-backend:dev
+    container_name: mannahub-backend-dev
     ports:
       - "9092:9092"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://food-rds.cunmy820cn5a.us-east-1.rds.amazonaws.com:3306/food?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: admin
-      SPRING_DATASOURCE_PASSWORD: 8897823543
-      MINIO_URL: http://minio:9000
       MINIO_ACCESS_KEY: admin
       MINIO_SECRET_KEY: admin1234
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SPRING_PROFILES_ACTIVE: dev
+      # 👇 Point to your local MySQL instead of container
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/food?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 120100
+      MINIO_URL: http://minio:9000
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-AIzaSyCuBdOP-cFxkzwBE_q0mgWjYFKVObe-56U}
     depends_on:
+      - redis
       - minio
     restart: always
+    networks:
+      - mannahub-network
+    profiles: ["dev"]
+
+  # ======================
+  # Backend App (PROD)
+  # ======================
+  app-prod:
+    image: food-app-backend:latest
+    container_name: mannahub-backend-prod
+    environment:
+      MINIO_ACCESS_KEY: admin
+      MINIO_SECRET_KEY: admin1234
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-prod:3306/food?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: ${SPRING_PROFILE_DB_USERNAME:-admin}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_PROFILE_DB_PASSWORD:-secureProdPass}
+      MINIO_URL: ${MINIO_URL:-https://your-production-minio-endpoint}
+    depends_on:
+      - redis
+      - mysql-prod
+    restart: always
+    networks:
+      - mannahub-network
+    profiles: ["prod"]
+
+volumes:
+  mysql-data-prod:
+
+networks:
+  mannahub-network:
+    driver: bridge
